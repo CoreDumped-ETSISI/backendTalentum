@@ -5,6 +5,7 @@ var Schema = mongoose.Schema
 var questionSchema = new Schema({
   text: string,
   image: string,
+  category: string,
   options: {
       option1: string,
       option2: string

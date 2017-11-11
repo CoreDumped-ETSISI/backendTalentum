@@ -1,7 +1,7 @@
 'use strict'
 const mongoose = require('mongoose')
 var Schema = mongoose.Schema;
-const Offer = require ('./model.js')
+const Offer = require ('./offer.js')
 
 
 var companySchema = new Schema({
