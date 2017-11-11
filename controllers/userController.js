@@ -60,9 +60,11 @@ function saveAnswer(req, res){
   var questionId = req.body.questionId
   var answer = req.body.answer
 
-  User.findOne({ _id: req.userId}, (err, user) => {
-    res.sendStatus(200)
-  })
+  User.update({ _id: req.user},
+    { $push: { answers: {questionId: questionId, answer: answer} } },
+    (err, user) => {
+      res.sendStatus(200)
+    })
 }
 
 module.exports = {

@@ -13,8 +13,8 @@ var userSchema = new Schema({
   password: { type: String, select: false, required: true },
   signUpDate: { type:Date, default: Date.now() },
   answers: [{
-    questionId: { type: Schema.Types.ObjectId , ref: 'question', required: true},
-    answer: { type: String , require: true},
+    questionId: { type: Schema.Types.ObjectId , ref: 'question', require: true},
+    answer: { type: String, require: true},
     timestamp: { type:Date, default: Date.now() }
   }]
 });
