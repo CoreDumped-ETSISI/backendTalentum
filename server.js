@@ -6,6 +6,7 @@ var mongoose = require('mongoose')
 const app = require('./app')
 
 mongoose.connect(mongodb, (err, res) => {
+  mongoose.Promise = global.Promise;
   if (err) {
     console.log('ERROR: connecting to Database. ' + err);
   } else {

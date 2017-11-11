@@ -3,12 +3,12 @@ const mongoose = require('mongoose')
 var Schema = mongoose.Schema
 
 var questionSchema = new Schema({
-  text: string,
-  image: string,
-  category: string,
+  text: String,
+  image: String,
+  category: String,
   options: {
-      option1: string,
-      option2: string
+      option1: String,
+      option2: String
   }
 });
 

@@ -4,12 +4,14 @@ const bodyParser  = require("body-parser")
 const cors = require("cors")
 const express = require("express")
 const app = express()
-const api = require('./routes/questionRoutes')
+const questionRoutes = require('./routes/questionRoutes')
+const userRoutes = require('./routes/userRoutes')
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors())
 
-app.use(api)
+app.use('/question', questionRoutes)
+app.use('/user', userRoutes)
 
 module.exports = app;

@@ -3,11 +3,10 @@ const mongoose = require('mongoose')
 var Schema = mongoose.Schema;
 const Offer = require ('./offer.js')
 
-
 var companySchema = new Schema({
-  name: string,
-  address: string,
-  email: string,
+  name: String,
+  address: String,
+  email: String,
   offers: [Offer]
 });
 
