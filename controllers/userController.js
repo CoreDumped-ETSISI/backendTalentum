@@ -12,6 +12,7 @@ function signUp(req, res){
   var avatarImage = req.body.avatarImage
   var password = req.body.password
   var phone = req.body.phone
+  var industries = req.body.industries
 
   User.findOne({email: email})
   .exec((err, userExist) => {
@@ -24,7 +25,8 @@ function signUp(req, res){
       surname: surname,
       avatarImage: avatarImage,
       password: password,
-      phone: phone
+      phone: phone,
+      industries: industries
     })
 
     user.save((err, user) => {
@@ -56,6 +58,47 @@ function login(req, res){
   })
 }
 
+function updateUser(req, res){
+  var email = req.body.email
+  var firstname = req.body.firstname
+  var surname = req.body.surname
+  var avatarImage = req.body.avatarImage
+  var password = req.body.password
+  var phone = req.body.phone
+  var industries = req.body.industries
+  var updatedFields = {}
+
+  if(email) updatedFields.email = req.body.email
+  if(firstname) updatedFields.firstname = req.body.firstname
+  if(surname) updatedFields.surname = req.body.surname
+  if(avatarImage) updatedFields.avatarImage = req.body.avatarImage
+  if(password) updatedFields.password = req.body.password
+  if(phone) updatedFields.phone = req.body.phone
+  if(industries) updatedFields.industries = req.body.industries
+
+  console.log(updatedFields)
+  console.log(email)
+  console.log(firstname)
+  User.findById(req.user, (err, user) => {
+      if (err) return res.sendStatus(500)
+      if (!user) return res.sendStatus(404)
+      user.set(updatedFields)
+      user.save((err) => {
+        if (err) return res.sendStatus(500)
+        return res.sendStatus(200)
+      })
+    })
+}
+
+function getUsers(req, res){
+  User.find({}, (err, users) => {
+      if(err) return res.status(500).send({message: `Error on request: ${err}` })
+      if(!users) return res.status(404).send({message: `No users found: ${err}` })
+
+      return res.status(200).send(users)
+  })
+}
+
 function saveAnswer(req, res){
   var questionId = req.body.questionId
   var answer = req.body.answer
@@ -70,5 +113,7 @@ function saveAnswer(req, res){
 module.exports = {
   signUp,
   login,
+  updateUser,
+  getUsers,
   saveAnswer
 };

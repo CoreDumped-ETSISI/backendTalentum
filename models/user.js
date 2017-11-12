@@ -16,7 +16,8 @@ var userSchema = new Schema({
     questionId: { type: Schema.Types.ObjectId , ref: 'question', require: true},
     answer: { type: String, require: true},
     timestamp: { type:Date, default: Date.now() }
-  }]
+  }],
+  industries: [{ type:String }]
 });
 
 userSchema.pre('save', function(next) {
