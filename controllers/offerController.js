@@ -2,7 +2,7 @@
 
 const Offer = require ('../models/offer')
 const User = require('../models/user')
-const Answer = requre ('../models/answer')
+const Answer = require ('../models/answer')
 
 function createOffer(req, res) {
     var offer = new Offer ({
