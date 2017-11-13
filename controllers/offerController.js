@@ -51,7 +51,7 @@ function getRandomOffer(req, res){
       .populate("questions.question")
       .exec((err, offers) => {
           if(err) return res.status(500).send({message: `Error on request: ${err}` })
-          if(!offers) return res.status(404).send({message: `No offers found: ${err}` })
+          if(offers.length == 0) return res.status(404).send({message: `No offers found: ${err}` })
           var rand = Math.floor(Math.random() * (offers.length - 0))
           console.log(offers[rand])
           return res.status(200).send(offers[rand])
