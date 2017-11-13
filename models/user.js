@@ -1,8 +1,8 @@
 'use strict'
+
+const bcrypt = require('bcrypt-nodejs')
 const mongoose = require('mongoose')
 var Schema = mongoose.Schema
-const question  = require('./question.js')
-const bcrypt = require('bcrypt-nodejs')
 
 var userSchema = new Schema({
   email: { type: String, unique: true, lowercase: true, required: true },
@@ -12,12 +12,8 @@ var userSchema = new Schema({
   avatarImage: String,
   password: { type: String, select: false, required: true },
   signUpDate: { type:Date, default: Date.now() },
-  answers: [{
-    questionId: { type: Schema.Types.ObjectId , ref: 'question', require: true},
-    answer: { type: String, require: true},
-    timestamp: { type:Date, default: Date.now() }
-  }],
-  industries: [{ type:String }]
+  industries: [{ type:String }],
+  offers: [{ type: Schema.Types.ObjectId , ref: 'Offer'}]
 });
 
 userSchema.pre('save', function(next) {

@@ -76,9 +76,6 @@ function updateUser(req, res){
   if(phone) updatedFields.phone = req.body.phone
   if(industries) updatedFields.industries = req.body.industries
 
-  console.log(updatedFields)
-  console.log(email)
-  console.log(firstname)
   User.findById(req.user, (err, user) => {
       if (err) return res.sendStatus(500)
       if (!user) return res.sendStatus(404)
@@ -99,12 +96,22 @@ function getUsers(req, res){
   })
 }
 
-function saveAnswer(req, res){
-  var questionId = req.body.questionId
-  var answer = req.body.answer
+function getUser(req, res){
+  console.log("hhh")
+  User.find({_id: req.user})
+  .exec((err, user) => {
+      if(err) return res.status(500).send({message: `Error on request: ${err}` })
+      if(!user) return res.status(404).send({message: `No users found: ${err}` })
+
+      return res.status(200).send(user)
+  })
+}
+
+function addOffers(req, res){
+  var offerId = req.body.offerId
 
   User.update({ _id: req.user},
-    { $push: { answers: {questionId: questionId, answer: answer} } },
+    { $push: { offers: offerId } },
     (err, user) => {
       res.sendStatus(200)
     })
@@ -115,5 +122,6 @@ module.exports = {
   login,
   updateUser,
   getUsers,
-  saveAnswer
+  getUser,
+  addOffers
 };
