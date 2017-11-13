@@ -68,7 +68,7 @@ function validateOffer (req, res) {
 
         var questionIDs = []
         var questions = offer.questions
-        for(i = 0; i < questions.length; i++){
+        for(var i = 0; i < questions.length; i++){
             questionIDs.push(questions[i]._id)
         }
             Answer.find({questionId: {$in : questionIDs} , userId: userID}, {multi : true}, (err, answers) => {
