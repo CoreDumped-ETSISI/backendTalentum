@@ -1,7 +1,8 @@
 'use strict'
 
-const Offer = require ('../models/offer.js')
+const Offer = require ('../models/offer')
 const User = require('../models/user')
+const Answer = requre ('../models/answer')
 
 function createOffer(req, res) {
     var offer = new Offer ({
@@ -59,9 +60,31 @@ function getRandomOffer(req, res){
   })
 }
 
+function validateOffer (req, res) {
+    var userID = req.user
+    Offer.findOne({_id: req.query._id}, (err, offer) => {
+        if(err) return res.status(500).send({message: `Error on request: ${err}`})
+        if(!offer) return res.status(404).send({message: `No offer was found: ${err}`})
+
+        var questionIDs = []
+        var questions = offer.questions
+        for(i = 0; i < questions.length; i++){
+            questionIDs.push(questions[i]._id)
+        }
+            Answer.find({questionId: {$in : questionIDs} , userId: userID}, {multi : true}, (err, answers) => {
+                if(err) return res.status(500).send({message: `Error on request: ${err}`})
+                if(!answer) return res.status(404).send({message: `No answer related to selected question was found: ${err}`})
+
+                console.log(answers)
+            })
+        }
+    )
+}
+
 module.exports = {
     createOffer,
     listOffers,
     findOffers,
-    getRandomOffer
+    getRandomOffer,
+    validateOffer
 }
