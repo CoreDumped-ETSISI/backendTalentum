@@ -9,6 +9,6 @@ api.post('/create', offerController.createOffer)
 api.get('/all', offerController.listOffers)
 api.get('/find', offerController.findOffers)
 api.get('/random', auth, offerController.getRandomOffer)
-api.get('/validate', offerController.validateOffer)
+api.get('/validate', auth, offerController.validateOffer)
 
 module.exports = api
