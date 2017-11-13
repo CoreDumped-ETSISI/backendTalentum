@@ -28,6 +28,7 @@ function signUp(req, res){
       phone: phone,
       industries: industries
     })
+    console.log(user)
 
     user.save((err, user) => {
       if (err) return res.sendStatus(500)

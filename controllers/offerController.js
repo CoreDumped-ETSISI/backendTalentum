@@ -62,20 +62,29 @@ function getRandomOffer(req, res){
 
 function validateOffer (req, res) {
     var userID = req.user
+
     Offer.findOne({_id: req.query._id}, (err, offer) => {
         if(err) return res.status(500).send({message: `Error on request: ${err}`})
         if(!offer) return res.status(404).send({message: `No offer was found: ${err}`})
 
+        var choosability = 0
         var questionIDs = []
         var questions = offer.questions
         for(var i = 0; i < questions.length; i++){
-            questionIDs.push(questions[i]._id)
+            questionIDs.push(questions[i].question)
         }
-            Answer.find({questionId: {$in : questionIDs} , userId: userID}, {multi : true}, (err, answers) => {
+            Answer.find({$and:[{questionId: {$in : questionIDs}}, {userId: userID}]}, (err, answers) => {
                 if(err) return res.status(500).send({message: `Error on request: ${err}`})
-                if(!answer) return res.status(404).send({message: `No answer related to selected question was found: ${err}`})
+                if(!answers) return res.status(404).send({message: `No answer related to selected question was found: ${err}`})
 
-                console.log(answers)
+                for(var j = 0 ; j < questions.length; j++){
+                    console.log("questions at j found: " + questions[j])
+                    console.log("answers at j found: " + answers[j].answer)
+                    if(questions[j].answer == (answers[j].answer))
+                    choosability = choosability + (1/questions.length)*100
+                }
+
+                return res.status(200).send({choosability})
             })
         }
     )
