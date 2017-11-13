@@ -5,11 +5,14 @@ const User = require('../models/user')
 const Answer = require ('../models/answer')
 
 function createOffer(req, res) {
+
     var offer = new Offer ({
         title: req.body.title,
         payout: req.body.payout,
+        image: req.body.image,
+        ubication: req.body.ubication,
         companyName: req.body.companyName,
-        sector: req.body.sector,
+        industries: req.body.sector,
         description: req.body.description,
         tasks: req.body.tasks,
         questions: req.body.questions
