@@ -32,7 +32,9 @@ function listOffers(req, res){
 }
 
 function findOffers(req, res){
-    Offer.find(req.query, (err, offers) => {
+    Offer.find(req.query)
+    .populate("questions.question")
+    .exec((err, offers) => {
         if(err) return res.status(500).send({message: `Error on request: ${err}` })
         if(!offers) return res.status(404).send({message: `No offers found: ${err}` })
 
@@ -46,6 +48,7 @@ function getRandomOffer(req, res){
       if(err) return res.status(500).send({message: `Error on request: ${err}` })
       if(!user) return res.status(404).send({message: `No user found: ${err}` })
       Offer.find({ _id: {$nin: user.offers} })
+      .populate("questions.question")
       .exec((err, offers) => {
           if(err) return res.status(500).send({message: `Error on request: ${err}` })
           if(!offers) return res.status(404).send({message: `No offers found: ${err}` })

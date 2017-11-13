@@ -97,7 +97,6 @@ function getUsers(req, res){
 }
 
 function getUser(req, res){
-  console.log("hhh")
   User.find({_id: req.user})
   .exec((err, user) => {
       if(err) return res.status(500).send({message: `Error on request: ${err}` })
