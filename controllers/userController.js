@@ -28,7 +28,9 @@ function signUp(req, res){
       avatarImage: avatarImage,
       password: password,
       phone: phone,
-      industries: industries
+      industries: industries,
+      education: education,
+      lastJob: lastJob
     })
     console.log(user)
 
