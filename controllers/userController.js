@@ -13,6 +13,8 @@ function signUp(req, res){
   var password = req.body.password
   var phone = req.body.phone
   var industries = req.body.industries
+  var education = req.body.education
+  var lastJob = req.body.lastJob
 
   User.findOne({email: email})
   .exec((err, userExist) => {

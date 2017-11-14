@@ -13,6 +13,8 @@ var userSchema = new Schema({
   password: { type: String, select: false, required: true },
   signUpDate: { type:Date, default: Date.now() },
   industries: [{ type:String }],
+  lastJob: String,
+  education: String,
   offers: [{ type: Schema.Types.ObjectId , ref: 'Offer'}]
 });
 
