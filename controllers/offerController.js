@@ -132,46 +132,46 @@ function validateOffer (req, res) {
                       if (err) return console.log(err);
                       console.log(res); // { filename: '/app/businesscard.pdf' }
 
-                      var base64 = require('file-base64');
-
-                      base64.encode('./businesscard.pdf', function(err, base64String) {
-                        const sendgrid = require('sendgrid')
-                        const helper = sendgrid.mail
-
-                        const sendMail = ({
-                            fromEmail = config.mailUser,
-                            toEmail = 'xavikh@gmail.com',
-                            subject = 'CV',
-                            content = 'Aquí teneís mi CV :)',
-                            contentType = 'text/html'
-                        }) => {
-                            fromEmail = new helper.Email(fromEmail)
-                            toEmail = new helper.Email(toEmail)
-                            content = new helper.Content(contentType, content)
-
-                            const mail = new helper.Mail(fromEmail, subject, toEmail, content)
-
-                            const attachment = new helper.Attachment()
-
-                            attachment.setType("application/pdf")
-                            attachment.setFilename("CV.pdf")
-                            attachment.setContent(base64String)
-
-                            mail.addAttachment(attachment)
-
-                            const sg = sendgrid(config.SENDGRID_API_KEY)
-                            const request = sg.emptyRequest({
-                                method: 'POST',
-                                path: '/v3/mail/send',
-                                body: mail.toJSON()
-                            })
-
-                            return sg.API(request)
-                        }
-                        sendMail({})
-                         .then((res)=>console.log(res))
-                         .catch((err)=>console.log(err))
-                      });
+                      // var base64 = require('file-base64');
+                      //
+                      // base64.encode('./businesscard.pdf', function(err, base64String) {
+                      //   const sendgrid = require('sendgrid')
+                      //   const helper = sendgrid.mail
+                      //
+                      //   const sendMail = ({
+                      //       fromEmail = config.mailUser,
+                      //       toEmail = 'xavikh@gmail.com',
+                      //       subject = 'CV',
+                      //       content = 'Aquí teneís mi CV :)',
+                      //       contentType = 'text/html'
+                      //   }) => {
+                      //       fromEmail = new helper.Email(fromEmail)
+                      //       toEmail = new helper.Email(toEmail)
+                      //       content = new helper.Content(contentType, content)
+                      //
+                      //       const mail = new helper.Mail(fromEmail, subject, toEmail, content)
+                      //
+                      //       const attachment = new helper.Attachment()
+                      //
+                      //       attachment.setType("application/pdf")
+                      //       attachment.setFilename("CV.pdf")
+                      //       attachment.setContent(base64String)
+                      //
+                      //       mail.addAttachment(attachment)
+                      //
+                      //       const sg = sendgrid(config.SENDGRID_API_KEY)
+                      //       const request = sg.emptyRequest({
+                      //           method: 'POST',
+                      //           path: '/v3/mail/send',
+                      //           body: mail.toJSON()
+                      //       })
+                      //
+                      //       return sg.API(request)
+                      //   }
+                      //   sendMail({})
+                      //    .then((res)=>console.log(res))
+                      //    .catch((err)=>console.log(err))
+                      // });
 
                     });
                   }
