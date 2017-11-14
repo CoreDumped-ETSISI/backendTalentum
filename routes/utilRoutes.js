@@ -29,4 +29,19 @@ api.get('/dropDB', (req,res) => {
   res.status(200).send("Droped")
 })
 
+api.use('/toPDF', (req, res) => {
+  var fs = require('fs');
+  var pdf = require('html-pdf');
+  var html = fs.readFileSync('./cv/index.html', 'utf8');
+  var options = {
+    format: 'Letter'
+   };
+
+  pdf.create(html, options).toFile('./businesscard.pdf', function(err, res) {
+    if (err) return console.log(err);
+    console.log(res); // { filename: '/app/businesscard.pdf' }
+  });
+  res.status(200).send("Droped")
+})
+
 module.exports = api
