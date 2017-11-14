@@ -12,7 +12,9 @@ function createAnswer(req, res) {
 
       answer.save(function (err, answer) {
           if(err) return res.status(500).send(err.message);
-          res.status(200).send(answer)
+          User.update({_id:req.user},{$inc:{points:10}},(err, user) => {
+            res.status(200).send(answer)
+          })
       })
 }
 

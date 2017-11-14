@@ -15,7 +15,8 @@ var userSchema = new Schema({
   industries: [{ type:String }],
   lastJob: String,
   education: String,
-  offers: [{ type: Schema.Types.ObjectId , ref: 'Offer'}]
+  offers: [{ type: Schema.Types.ObjectId , ref: 'Offer'}],
+  points: {type: Number, default : 0}
 });
 
 userSchema.pre('save', function(next) {
