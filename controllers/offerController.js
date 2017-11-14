@@ -76,19 +76,21 @@ function validateOffer (req, res) {
         for(var i = 0; i < questions.length; i++){
             questionIDs.push(questions[i].question)
         }
-            Answer.find({$and:[{questionId: {$in : questionIDs}}, {userId: userID}]}, (err, answers) => {
-                if(err) return res.status(500).send({message: `Error on request: ${err}`})
-                if(!answers) return res.status(404).send({message: `No answer related to selected question was found: ${err}`})
+        Answer.find({$and:[{questionId: {$in : questionIDs}}, {userId: userID}]}, (err, answers) => {
+            if(err) return res.status(500).send({message: `Error on request: ${err}`})
+            if(!answers) return res.status(404).send({message: `No answer related to selected question was found: ${err}`})
 
-                for(var j = 0 ; j < questions.length; j++){
-                    console.log("questions at j found: " + questions[j])
-                    console.log("answers at j found: " + answers[j].answer)
-                    if(questions[j].answer == (answers[j].answer))
-                    choosability = choosability + (1/questions.length)*100
-                }
+            for(var j = 0 ; j < questions.length; j++){
+              if(answers[j]!= undefined){
+                console.log("questions at j found: " + questions[j])
+                console.log("answers at j found: " + answers[j].answer)
+                if(questions[j].answer == (answers[j].answer))
+                choosability = choosability + (1/questions.length)*100
+              }
+            }
 
-                return res.status(200).send({choosability})
-            })
+            return res.status(200).send({choosability})
+        })
         }
     )
 }
