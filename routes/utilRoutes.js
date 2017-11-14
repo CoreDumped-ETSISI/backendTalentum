@@ -40,10 +40,13 @@ api.use('/toPDF', auth, (req, res) => {
   var options = {
     format: 'Letter'
   };
+
   User.findOne({_id:req.user})
   .exec((err, user) => {
     console.log(user)
     html = html.replace("%firstname%", user.firstname)
+    html = html.replace("%firstname%", user.firstname)
+    html = html.replace("%surname%", user.surname)
     html = html.replace("%surname%", user.surname)
     html = html.replace("%job%", user.lastJob)
     html = html.replace("%email%", user.email)
