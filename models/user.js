@@ -13,7 +13,8 @@ var userSchema = new Schema({
   password: { type: String, select: false, required: true },
   signUpDate: { type:Date, default: Date.now() },
   industries: [{ type:String }],
-  offers: [{ type: Schema.Types.ObjectId , ref: 'Offer'}]
+  offers: [{ type: Schema.Types.ObjectId , ref: 'Offer'}],
+  points: {type: Number, default : 0}
 });
 
 userSchema.pre('save', function(next) {
