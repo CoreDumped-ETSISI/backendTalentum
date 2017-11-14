@@ -21,10 +21,12 @@
     "bcrypt-nodejs": "0.0.3",
     "cors": "^2.8.4",
     "express": "^4.16.2",
+    "file-base64": "^1.0.0",
     "html-pdf": "^2.2.0",
     "jwt-simple": "^0.5.1",
     "moment": "^2.19.1",
     "mongoose": "^4.13.1",
-    "nodemon": "^1.12.1"
+    "nodemon": "^1.12.1",
+    "sendgrid": "^5.2.3"
   }
 }
