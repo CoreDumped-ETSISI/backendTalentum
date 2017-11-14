@@ -6,8 +6,10 @@ var Schema = mongoose.Schema;
 var offerSchema = new Schema({
   title: String,
   payout: String,
+  image: String,
+  ubication: String,
   companyName: String,
-  sector: String,
+  industries: String,
   description: String,
   tasks: String,
   questions: [{

@@ -10,6 +10,7 @@ const answerRoutes = require('./routes/answerRoutes')
 const companyRoutes = require('./routes/companyRoutes')
 const questionRoutes = require('./routes/questionRoutes')
 const userRoutes = require('./routes/userRoutes')
+const utilRoutes = require('./routes/utilRoutes')
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -20,5 +21,6 @@ app.use('/offer', offerRoutes)
 app.use('/company', companyRoutes)
 app.use('/question', questionRoutes)
 app.use('/user', userRoutes)
+app.use('/util', utilRoutes)
 
 module.exports = app;
